@@ -57,20 +57,14 @@ function roundResult(playerSelection, computerSelection) {
 //Return Match Reults
 
 function matchResult(playerScore, computerScore) {
-
-  if(playerScore > computerScore){
-    return 'Player won the match';
-  }
-
-  else if(computerScore > playerScore) {
-    return 'Computer Won the match';
-  }
-
-  else if(playerScore == computerScore){
-    return 'Its a tie game';
-  }
-  else {
-    return 'Unknown Error';
+  if (playerScore > computerScore) {
+    return "Player won the match";
+  } else if (computerScore > playerScore) {
+    return "Computer Won the match";
+  } else if (playerScore == computerScore) {
+    return "Its a tie game";
+  } else {
+    return "Unknown Error";
   }
 }
 
@@ -79,7 +73,7 @@ function game() {
   playerScore = 0;
   computerScore = 0;
   round = 0;
-  for (;playerScore < 5 && computerScore < 5;) {
+  for (; playerScore < 5 && computerScore < 5; ) {
     round++;
     const playerSelection = prompt(
       `Round ${round} Choose "Rock", "Paper", "Scissor": `
@@ -109,8 +103,8 @@ function game() {
     } else if (result == "computerwin") {
       computerScore++;
       console.log(
-        `Computer Won this Round Player: ${playerScore} | Computer: ${computerScore}`);
-        
+        `Computer Won this Round Player: ${playerScore} | Computer: ${computerScore}`
+      );
     } else if (result === false) {
       console.log(
         "Their was an Input Error Please Enter Rock, Paper or Scissors"
