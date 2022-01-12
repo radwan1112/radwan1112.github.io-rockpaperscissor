@@ -1,0 +1,158 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100vh;
+    font-size: 10px;
+}
+
+body {
+    background-color: #d4d4d4;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #222930;
+    width: 100%;
+    text-align: center;
+    padding: 40px 10px;
+    color: #fff;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+    font-size: 2.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p{
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+    background-color: #222930;
+    color: #fff;
+    font-size: 2rem;
+    padding: 20px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    border: 2px solid orange;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    margin: 4% 3% 2% 3%;
+}
+
+
+.game-main {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.container .player-guess, .container .pc-guess {
+    margin: 5px 30px;
+}
+
+.player-guess {
+    display: inline-block;
+}
+
+.pc-guess {
+    display: inline-block;
+}
+
+.player-guess img, .pc-guess img {
+    width: 120px;
+    margin: 0px 0px 50px 0px;
+}
+
+.choice {
+    display: inline-block;
+    background-color: #ebe3a175;
+    border: 2px solid #222930;
+    margin: 5px 10px;
+    transition: 0.3s;
+    border-radius: 20px;
+}
+
+.choice:hover {
+    transform: scale(1.1);
+    border: 2px solid green;
+    cursor: pointer;
+    background-color: #b3af8e;
+}
+
+.choice img {
+    width: 130px;
+}
+
+.endgame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    background-color: orange;
+    padding: 20px 50px;
+    text-align: center;
+    border-radius: 20px;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.endgame.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width:500px) {
+    html {
+        font-size: 8px;
+    }
+
+    .choice img {
+        width: 80px;
+        max-width: 100%;
+    }
+
+    .choice {
+        margin: 2px 5px;
+        
+    }
+
+    .player-guess img, .pc-guess img {
+        width: 80px;
+        margin: 0px 0px 30px 0px;
+    }
+
+
+}

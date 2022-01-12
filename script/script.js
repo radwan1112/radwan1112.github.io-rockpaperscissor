@@ -1,18 +1,34 @@
-// Computer Turn Random Select one of Three
-function computerPlay() {
-  let rockPaperScissor = ["rock", "paper", "scissor"];
-  return rockPaperScissor[randomNumber()];
-}
-
 // Generate a Random number between 0 and 2
 function randomNumber() {
   let randomNumber = Math.floor(Math.random() * 3);
   return randomNumber;
 }
 
+// Computer Turn Random Select one of Three
+function computerPlay() {
+  let rockPaperScissor = ["rock", "paper", "scissor"];
+  let pcChoice = rockPaperScissor[randomNumber()];
+
+  if (pcChoice === "rock") {
+    pcChoiceImg.src = "/images/rock-icon.png";
+  } else if (pcChoice === "paper") {
+    pcChoiceImg.src = "/images/paper-icon.png";
+  } else if (pcChoice === "scissor") {
+    pcChoiceImg.src = "/images/scissor-icon.png";
+  } else {
+    console.log("There was an Error Pc Choice");
+  }
+
+  return pcChoice;
+}
+
+function capitalFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 // Return Round Results
 function roundResult(playerSelection, computerSelection) {
-  let tieGame = "tie";
+  let tieGame = "tiegame";
   let playerWin = "playerwin";
   let computerWin = "computerwin";
 
@@ -47,7 +63,7 @@ function roundResult(playerSelection, computerSelection) {
       case "scissor":
         return tieGame;
       default:
-        return fales;
+        return false;
     }
   } else {
     return false;
@@ -55,67 +71,94 @@ function roundResult(playerSelection, computerSelection) {
 }
 
 //Return Match Reults
-
-function matchResult(playerScore, computerScore) {
-  if (playerScore > computerScore) {
-    return "Player won the match";
-  } else if (computerScore > playerScore) {
-    return "Computer Won the match";
-  } else if (playerScore == computerScore) {
-    return "Its a tie game";
+function matchTracker(humanScore, computerScore) {
+  if (humanScore >= 5 && humanScore > computerScore) {
+    gameResult.textContent = "You Won!!!";
+    endgame.classList.add("active");
+  } else if (computerScore >= 5 && computerScore > humanScore) {
+    gameResult.textContent = "You Lost!!!";
+    endgame.classList.add("active");
   } else {
-    return "Unknown Error";
+    return true;
   }
 }
 
-//Start a new Game
-function game() {
+function restartMatch() {
   playerScore = 0;
   computerScore = 0;
-  round = 0;
-  for (; playerScore < 5 && computerScore < 5; ) {
-    round++;
-    const playerSelection = prompt(
-      `Round ${round} Choose "Rock", "Paper", "Scissor": `
-    );
-    let playerSelectionDisplay =
-      playerSelection[0].toUpperCase() + playerSelection.substring(1);
-    console.log(`You have selected: ${playerSelectionDisplay}`);
-    let playerSelectionLowerCase = playerSelection.toLowerCase();
-    const computerSelection = computerPlay();
-    let computerSelectionDisplay =
-      computerSelection[0].toUpperCase() + computerSelection.substring(1);
-    console.log(`Computer have selected: ${computerSelectionDisplay}`);
-
-    let result = roundResult(playerSelectionLowerCase, computerSelection);
-
-    if (result == "tie") {
-      playerScore++;
-      computerScore++;
-      console.log(
-        `Tie Game Player: ${playerScore} | Computer: ${computerScore}`
-      );
-    } else if (result == "playerwin") {
-      playerScore++;
-      console.log(
-        `Player Won this Round Player: ${playerScore} | Computer: ${computerScore}`
-      );
-    } else if (result == "computerwin") {
-      computerScore++;
-      console.log(
-        `Computer Won this Round Player: ${playerScore} | Computer: ${computerScore}`
-      );
-    } else if (result === false) {
-      console.log(
-        "Their was an Input Error Please Enter Rock, Paper or Scissors"
-      );
-      i--;
-    } else {
-      console.log("Their was an unknown Error!");
-      i--;
-    }
-  }
-  console.log(matchResult(playerScore, computerScore));
+  playerScoreSpan.textContent = `${playerScore}`;
+  pcScoreSpan.textContent = `${computerScore}`;
+  playerChoiceImg.src = "/images/question-mark.png";
+  pcChoiceImg.src = "/images/question-mark.png";
+  resultPara.textContent = "Choose Rock Paper or Scissor";
+  explainPara.textContent = "First to 5 points Wins the Game!!!";
 }
 
-game();
+function matchStart(playerChoice) {
+  let match;
+
+  playerChoiceImg.src = `/images/${playerChoice}-icon.png`;
+  pcChoice = computerPlay();
+  let result = roundResult(playerChoice, pcChoice);
+  playerChoice = capitalFirstLetter(playerChoice);
+  pcChoice = capitalFirstLetter(pcChoice);
+
+  if (result == "tiegame") {
+    playerScore++;
+    computerScore++;
+    playerScoreSpan.textContent = `${playerScore}`;
+    pcScoreSpan.textContent = `${computerScore}`;
+    resultPara.textContent = `Tie Game`;
+    explainPara.textContent = `${playerChoice} against ${pcChoice}`;
+  } else if (result == "playerwin") {
+    playerScore++;
+    playerScoreSpan.textContent = `${playerScore}`;
+    resultPara.textContent = `You Won!`;
+    explainPara.textContent = `${playerChoice} against ${pcChoice}`;
+  } else if (result == "computerwin") {
+    computerScore++;
+    pcScoreSpan.textContent = `${computerScore}`;
+    resultPara.textContent = `Computer Won!`;
+    explainPara.textContent = `${playerChoice} against ${pcChoice}`;
+  } else if (result === false) {
+    console.log("Their was an unknown Error!");
+  } else {
+    console.log("Their was an unknown Error!");
+  }
+
+  matchTracker(playerScore, computerScore);
+}
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissor = document.querySelector("#scissor");
+let playerChoiceImg = document.querySelector("#player_choice");
+let pcChoiceImg = document.querySelector("#pc_choice");
+let resultPara = document.querySelector("#result");
+let explainPara = document.querySelector("#explain");
+let playerScoreSpan = document.querySelector("#player_score");
+let pcScoreSpan = document.querySelector("#pc_score");
+let pcChoice, playerChoice;
+let playerScore = 0;
+let computerScore = 0;
+let gameResult = document.querySelector(".game-result");
+let endgame = document.querySelector(".endgame");
+let playAgain = document.querySelector("button.btn");
+
+// Player Selection
+rock.addEventListener("click", () => {
+  matchStart("rock");
+});
+
+paper.addEventListener("click", () => {
+  matchStart("paper");
+});
+
+scissor.addEventListener("click", () => {
+  matchStart("scissor");
+});
+
+playAgain.addEventListener("click", () => {
+  restartMatch();
+  endgame.classList.remove("active");
+});
