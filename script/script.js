@@ -88,8 +88,8 @@ function restartMatch() {
   computerScore = 0;
   playerScoreSpan.textContent = `${playerScore}`;
   pcScoreSpan.textContent = `${computerScore}`;
-  playerChoiceImg.src = "/images/question-mark.png";
-  pcChoiceImg.src = "/images/question-mark.png";
+  playerChoiceImg.src = "images/question-mark.png";
+  pcChoiceImg.src = "images/question-mark.png";
   resultPara.textContent = "Choose Rock Paper or Scissor";
   explainPara.textContent = "First to 5 points Wins the Game!!!";
 }
