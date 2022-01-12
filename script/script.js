@@ -10,11 +10,11 @@ function computerPlay() {
   let pcChoice = rockPaperScissor[randomNumber()];
 
   if (pcChoice === "rock") {
-    pcChoiceImg.src = "/images/rock-icon.png";
+    pcChoiceImg.src = "images/rock-icon.png";
   } else if (pcChoice === "paper") {
-    pcChoiceImg.src = "/images/paper-icon.png";
+    pcChoiceImg.src = "images/paper-icon.png";
   } else if (pcChoice === "scissor") {
-    pcChoiceImg.src = "/images/scissor-icon.png";
+    pcChoiceImg.src = "images/scissor-icon.png";
   } else {
     console.log("There was an Error Pc Choice");
   }
@@ -97,7 +97,7 @@ function restartMatch() {
 function matchStart(playerChoice) {
   let match;
 
-  playerChoiceImg.src = `/images/${playerChoice}-icon.png`;
+  playerChoiceImg.src = `images/${playerChoice}-icon.png`;
   pcChoice = computerPlay();
   let result = roundResult(playerChoice, pcChoice);
   playerChoice = capitalFirstLetter(playerChoice);
